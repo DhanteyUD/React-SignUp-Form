@@ -1,25 +1,25 @@
 # React-SignUp-Form
 
 Run `npm install` after clone to install all dependencies
-    
+
 1. `cd client` and run `npm start` on the terminal to start client server
 
 2. `cd server` and split terminal into 4 :
 
-    a. `npm run build` to transpile typescript codes into javascript
-    
-    b.  `npm run docker` to start docker
-    
-    c. `npm run db` to start database
-    
-    d. `npm run start` to start backend server
-    
-> Note: 
+   a. `npm run build` to transpile typescript codes into javascript
+
+   b. `npm run docker` to start docker
+
+   c. `npm run db` to start database
+
+   d. `npm run start` to start backend server
+
+> Note:
+>
 > 1. Make sure docker hub is running
-> 2. Install Postico as preffered postgres GUI
+> 2. Install Postico as preferred postgres GUI
 
 ---
-
 
 1. Sign Up Frontend Form :
 
@@ -97,7 +97,6 @@ function RegisterUser() {
 }
 
 export default RegisterUser;
-
 ```
 
 2. Sign Up Backend Controller :
@@ -144,7 +143,6 @@ const registerUser = async (
 };
 
 export default registerUser;
-
 ```
 
 3. Sign Up CSS :
@@ -200,5 +198,4 @@ button {
     font-size: 18px;
   }
 }
-
 ```

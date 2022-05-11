@@ -1,0 +1,91 @@
+.form-header {
+  margin-left: 45%;
+}
+.form {
+  margin-top: 80px;
+  width: 50%;
+  height: 50%;
+  margin-left: 28%;
+}
+label {
+  margin-bottom: 10px;
+  display: flex;
+}
+input {
+  width: 80%;
+  border: 2px solid #000;
+  margin-bottom: 40px;
+  padding: 10px;
+}
+button {
+  display: flex;
+  position: absolute;
+  min-width: 41.5%;
+  padding: 10px;
+  font-size: 18px;
+  padding-left: 265px;
+}
+.password-input {
+  width: 74%;
+  padding-right: 50px;
+}
+.eye {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: -35px;
+}
+.error-msg {
+  font-size: 13px;
+  position: absolute;
+  color: red;
+  max-width: 40%;
+  min-height: 50px;
+  padding: 10px;
+  margin-top: 70px;
+}
+.success-msg {
+  font-size: 13px;
+  position: absolute;
+  color: rgb(27, 161, 23);
+  max-width: 40%;
+  min-height: 50px;
+  padding: 10px;
+  margin-top: 70px;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-header {
+    margin-left: 33%;
+  }
+  .form {
+    margin-top: 20%;
+    width: 50%;
+    height: 50%;
+    margin-left: 25%;
+  }
+  label {
+    margin-bottom: 10px;
+    display: flex;
+  }
+  input {
+    border: 2px solid #000;
+    margin-bottom: 40px;
+  }
+  button {
+    display: flex;
+    position: absolute;
+    min-width: 46%;
+    padding: 10px;
+    font-size: 18px;
+    padding-left: 55px;
+  }
+  .password-input {
+    width: 60%;
+    padding-right: 50px;
+  }
+  .eye {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: -35px;
+  }
+}
