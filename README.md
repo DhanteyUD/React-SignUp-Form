@@ -1,18 +1,25 @@
 # React-SignUp-Form
 
-1. **Install the backend express server:**
-
-     `npm i express-generator-typescript`
+Run `npm install` after clone to install all dependencies
     
-2. **Install the frontend react client:**
+1. `cd client` and run `npm start` on the terminal to start client server
 
-      `npx create-react-app my-app --template typescript`
-  
-3. **Install axios and cors:**
- 
-      `npm i axios cors`
-      
- ---
+2. `cd server` and split terminal into 4 :
+
+    a. `npm run build` to transpile typescript codes into javascript
+    
+    b.  `npm run docker` to start docker
+    
+    c. `npm run db` to start database
+    
+    d. `npm run start` to start backend server
+    
+> Note: 
+> 1. Make sure docker hub is running
+> 2. Install Postico as preffered postgres GUI
+
+---
+
 
 1. Sign Up Frontend Form :
 
