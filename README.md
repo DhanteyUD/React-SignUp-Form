@@ -140,7 +140,7 @@ export default registerUser;
 
 ```
 
-3. Sign Up CSS
+3. Sign Up CSS :
 
 ```css
 .form-header {
