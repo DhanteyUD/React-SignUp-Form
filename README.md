@@ -26,7 +26,7 @@ Run `npm install` after clone to install all dependencies
 ```js
 import axios from 'axios';
 import React, { useState, ChangeEvent } from 'react';
-import './SignU.css';
+import './SignUp.css';
 
 function RegisterUser() {
   const [email, setEmail] = useState('');
