@@ -6,6 +6,7 @@
   width: 50%;
   height: 50%;
   margin-left: 28%;
+  position: relative;
 }
 label {
   margin-bottom: 10px;
@@ -20,9 +21,10 @@ input {
 button {
   display: flex;
   position: absolute;
-  min-width: 41.5%;
+  width: 83%;
   padding: 10px;
   font-size: 18px;
+  margin-top: 20px;
   padding-left: 265px;
 }
 .password-input {
@@ -38,19 +40,38 @@ button {
   font-size: 13px;
   position: absolute;
   color: red;
-  max-width: 40%;
+  max-width: 83%;
   min-height: 50px;
   padding: 10px;
-  margin-top: 70px;
+  margin-top: 80px;
 }
 .success-msg {
   font-size: 13px;
+  color: #fff;
+  font-weight: 600;
   position: absolute;
-  color: rgb(27, 161, 23);
-  max-width: 40%;
-  min-height: 50px;
-  padding: 10px;
-  margin-top: 70px;
+  text-align: center;
+  align-self: center;
+  background-color: rgb(27, 161, 23);
+  z-index: 10;
+  width: 600px;
+  height: 270px;
+  padding-top: 33%;
+  border-radius: 10px;
+  margin-top: -60%;
+}
+.check-icon {
+  font-size: 100px;
+  position: absolute;
+  margin-top: -25%;
+  margin-left: 21%;
+}
+.refresh {
+  margin-top: 40px;
+  margin-left: 90px;
+  font-size: 13px;
+  width: 70%;
+  padding-left: 27%;
 }
 
 @media only screen and (max-width: 600px) {
@@ -62,6 +83,7 @@ button {
     width: 50%;
     height: 50%;
     margin-left: 25%;
+    position: relative;
   }
   label {
     margin-bottom: 10px;
@@ -74,7 +96,7 @@ button {
   button {
     display: flex;
     position: absolute;
-    min-width: 46%;
+    width: 92%;
     padding: 10px;
     font-size: 18px;
     padding-left: 55px;
@@ -87,5 +109,32 @@ button {
     position: absolute;
     margin-top: 10px;
     margin-left: -35px;
+  }
+  .success-msg {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    position: absolute;
+    text-align: center;
+    background-color: rgb(27, 161, 23);
+    width: 230px;
+    height: 130px;
+    padding: 100% 20px;
+    margin-top: -439px;
+    border-radius: 10px;
+    margin-left: -20%;
+  }
+  .check-icon {
+    font-size: 100px;
+    position: absolute;
+    margin-left: 20%;
+    margin-top: -50%;
+  }
+  .refresh {
+    margin-top: 40px;
+    margin-left: 0;
+    font-size: 13px;
+    width: 85%;
+    padding-left: 70px;
   }
 }

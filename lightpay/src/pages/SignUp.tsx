@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, ChangeEvent } from 'react';
 import './SignUp.css';
-
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 const eye = <FontAwesomeIcon icon={faEye} />;
@@ -35,29 +35,29 @@ function RegisterUser() {
     setPassword(e.target.value);
   };
 
-  const data = {
-    email,
-    fullname,
-    mobile,
-    password,
-  };
+  function refreshPage() {
+    window.location.reload();
+  }
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:5000/auth/register', data)
-      .then((info) => {
-        setSuccessMessage(info.data.message);
-        setErrorMessage('');
-        console.log(info.data.message);
-      })
-      .catch((err) => {
-        let error = err.response.data;
-
-        setErrorMessage(err.response.data);
-        setSuccessMessage('');
-        console.log(error);
+    try {
+      let response = await axios.post('http://localhost:5000/auth/register', {
+        email,
+        fullname,
+        mobile,
+        password,
       });
+      setSuccessMessage(response.data.message);
+      setErrorMessage('');
+      console.log(response.data.message);
+    } catch (err: any) {
+      let error = err.response.data;
+
+      setErrorMessage(err.response.data);
+      setSuccessMessage('');
+      console.log(error);
+    }
   };
 
   return (
@@ -92,7 +92,17 @@ function RegisterUser() {
             <div className="error-msg"> {errorMessage} </div>
           ) : null}
           {successMessage.length > 0 ? (
-            <div className="success-msg"> {successMessage} </div>
+            <div className="success-msg">
+              {' '}
+              <FontAwesomeIcon
+                className="check-icon"
+                icon={solid('circle-check')}
+              />
+              {successMessage}{' '}
+              <button onClick={refreshPage} className="refresh">
+                Refresh form
+              </button>
+            </div>
           ) : null}
         </div>
       </form>

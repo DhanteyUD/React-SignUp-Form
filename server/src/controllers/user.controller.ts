@@ -22,17 +22,17 @@ const registerUser = async (
       password: hashedPassword,
     });
 
-    let insertQuery = `INSERT into "Users"(email, fullname, mobile, password)
-                        VALUES('${email}', '${fullname}', '${mobile}','${hashedPassword}')
+    let insertQuery = `INSERT into "Users"(email, fullname, mobile, password, "createdAt", "updatedAt")
+                        VALUES('${email}', '${fullname}', '${mobile}','${hashedPassword}', (to_timestamp(${Date.now()} / 1000.0)), (to_timestamp(${Date.now()} / 1000.0)))
     `;
 
     pool.query(insertQuery, (err: any, result: any) => {
       if (!err) {
-        res.status(201).send({
+        res.status(201).json({
           message: 'Registration successful, please check your email to verify',
         });
       } else {
-        res.status(500).send({ message: 'User already exist with this email' });
+        res.status(500).send('User already exist with this email');
       }
     });
   } catch (err) {
