@@ -6,7 +6,7 @@ Run `npm install` after clone to install all dependencies
 
 2. `cd server` and split terminal into 4 :
 
-   a. `npm run build` to transpile typescript codes into javascript
+   a. `npm run build` to transpile codes into javascript
 
    b. `npm run docker` to start docker
 
