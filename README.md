@@ -17,7 +17,7 @@ Run `npm install` after clone to install all dependencies
 > Note:
 >
 > 1. Make sure docker hub is running
-> 2. Install Postico as preferred postgres GUI
+> 2. Install Postico as preferred postgreSQL GUI
 
 ---
 
