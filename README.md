@@ -29,44 +29,46 @@ import React, { useState, ChangeEvent } from 'react';
 import './SignUp.css';
 
 function RegisterUser() {
-  const [email, setEmail] = useState('');
-  const [fullname, setFullName] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [password, setPassword] = useState('');
+  const [profile, setProfile] = useState(signup);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const getEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
   };
 
-  const getFullname = (e: ChangeEvent<HTMLInputElement>) => {
-    setFullName(e.target.value);
-  };
 
-  const getMobile = (e: ChangeEvent<HTMLInputElement>) => {
-    setMobile(e.target.value);
-  };
+  function refreshPage() {
+    window.location.reload();
+  }
 
-  const getPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const data = {
-    email,
-    fullname,
-    mobile,
-    password,
-  };
-
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:3000/auth/register', data)
-      .then((info) => {
-        console.log(info.data.message);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
+    const {name, value} = e.target;
+    setProfile((prev) => ({...prev, [name]: value}));
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      let response = await axios.post('http://localhost:5000/auth/register', {
+        email: profile.email,
+        fullname: profile.fullname,
+        mobile: profile.mobile,
+        password: profile.password
       });
+      setSuccessMessage(response.data.message);
+      setErrorMessage('');
+      setProfile(signup);
+      console.log(response.data.message);
+    } catch (err: any) {
+      let error = err.response.data;
+
+      setErrorMessage(err.response.data);
+      setSuccessMessage('');
+      console.log(error);
+    }
   };
 
   return (
@@ -78,25 +80,47 @@ function RegisterUser() {
 
         <div className="form">
           <label htmlFor="email">Email</label>
-          <input type="email" value={email} onChange={getEmail} />
+          <input type="email" name="email" value={profile.email} onChange={handleChange} />
 
           <label htmlFor="fullname">fullname</label>
-          <input type="text" value={fullname} onChange={getFullname} />
+          <input type="text" name="fullname" value={profile.fullname} onChange={handleChange} />
 
           <label htmlFor="mobile">mobile</label>
-          <input type="text" value={mobile} onChange={getMobile} />
+          <input type="text" name="mobile" value={profile.mobile} onChange={handleChange} />
 
           <label htmlFor="password">Password</label>
-          <input type="password" value={password} onChange={getPassword} />
+          <input
+            type={passwordShown ? 'text' : 'password'}
+            name="password"
+            value={profile.password}
+            onChange={handleChange}
+          />
+          <i className="eye" onClick={togglePasswordVisiblity}>
+            {eye}
+          </i>
 
           <button type="submit">Sign Up</button>
+          {errorMessage.length > 0 ? (
+            <div className="error-msg"> {errorMessage} </div>
+          ) : null}
+          {successMessage.length > 0 ? (
+            <div className="success-msg">
+              {' '}
+              <FontAwesomeIcon
+                className="check-icon"
+                icon={solid('circle-check')}
+              />
+              {successMessage}{' '}
+              <button onClick={refreshPage} className="refresh">
+                Refresh form
+              </button>
+            </div>
+          ) : null}
         </div>
       </form>
     </>
   );
 }
-
-export default RegisterUser;
 ```
 
 2. Sign Up Backend Controller :
