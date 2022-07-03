@@ -1,16 +1,14 @@
 import axios from 'axios';
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import './SignUp.css';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import {signup} from '../models/signp.model'
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 function RegisterUser() {
-  const [email, setEmail] = useState('');
-  const [fullname, setFullName] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [password, setPassword] = useState('');
+  const [profile, setProfile] = useState(signup);
   const [passwordShown, setPasswordShown] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -19,37 +17,29 @@ function RegisterUser() {
     setPasswordShown(passwordShown ? false : true);
   };
 
-  const getEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const getFullname = (e: ChangeEvent<HTMLInputElement>) => {
-    setFullName(e.target.value);
-  };
-
-  const getMobile = (e: ChangeEvent<HTMLInputElement>) => {
-    setMobile(e.target.value);
-  };
-
-  const getPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
 
   function refreshPage() {
     window.location.reload();
   }
 
-  const handleSubmit = async (e: React.SyntheticEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const {name, value} = e.target;
+    setProfile((prev) => ({...prev, [name]: value}));
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       let response = await axios.post('http://localhost:5000/auth/register', {
-        email,
-        fullname,
-        mobile,
-        password,
+        email: profile.email,
+        fullname: profile.fullname,
+        mobile: profile.mobile,
+        password: profile.password
       });
       setSuccessMessage(response.data.message);
       setErrorMessage('');
+      setProfile(signup);
       console.log(response.data.message);
     } catch (err: any) {
       let error = err.response.data;
@@ -69,19 +59,20 @@ function RegisterUser() {
 
         <div className="form">
           <label htmlFor="email">Email</label>
-          <input type="email" value={email} onChange={getEmail} />
+          <input type="email" name="email" value={profile.email} onChange={handleChange} />
 
           <label htmlFor="fullname">fullname</label>
-          <input type="text" value={fullname} onChange={getFullname} />
+          <input type="text" name="fullname" value={profile.fullname} onChange={handleChange} />
 
           <label htmlFor="mobile">mobile</label>
-          <input type="text" value={mobile} onChange={getMobile} />
+          <input type="text" name="mobile" value={profile.mobile} onChange={handleChange} />
 
           <label htmlFor="password">Password</label>
           <input
             type={passwordShown ? 'text' : 'password'}
-            value={password}
-            onChange={getPassword}
+            name="password"
+            value={profile.password}
+            onChange={handleChange}
           />
           <i className="eye" onClick={togglePasswordVisiblity}>
             {eye}
